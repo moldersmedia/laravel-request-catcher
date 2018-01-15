@@ -48,9 +48,6 @@ class RequestCatcherController extends Controller
         $requests = $request->paths;
 
         return view('request-catcher::show', compact('requests', 'request'));
-
-        dd( __LINE__ . ':[' . __FILE__ . ']' , $request->toArray());
-
     }
 
     /**
@@ -62,7 +59,7 @@ class RequestCatcherController extends Controller
         $request = $this->repository->getRequestById($requestId);
 
         try {
-            $this->guzzle->request($request->method, 'http://webshop.local/request-catcher/test', [
+            $this->guzzle->request($request->method, $request->url, [
                 'headers'     => $request->headers + [
                         'X-Request-Catcher-Id' => $request->id,
                     ],
