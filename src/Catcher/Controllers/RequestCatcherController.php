@@ -59,10 +59,13 @@ class RequestCatcherController extends Controller
         $request = $this->repository->getRequestById($requestId);
 
         try {
-            $this->guzzle->request($request->method, $request->url, [
-                'headers'     => $request->headers + [
-                        'X-Request-Catcher-Id' => $request->id,
-                    ],
+            $headers = array_merge([
+                'X-Request-Catcher-Id' => $request->id,
+                'Content-Type'         => 'application/x-www-form-urlencoded'
+            ], $request->headers);
+
+            $this->guzzle->post($request->url, [
+                'headers'     => $headers,
                 'form_params' => $request->input
             ]);
 
