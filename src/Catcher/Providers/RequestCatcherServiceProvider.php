@@ -1,9 +1,13 @@
 <?php namespace MoldersMedia\RequestCatcher\Catcher\Providers;
 
 use App\Http\Kernel;
+use App\Http\Middleware\EncryptCookies;
 use Barryvdh\Cors\HandleCors;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Routing\Router;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 use MoldersMedia\RequestCatcher\Catcher\Middleware\RequestCatcherMiddleware;
 
 class RequestCatcherServiceProvider extends ServiceProvider
@@ -25,6 +29,10 @@ class RequestCatcherServiceProvider extends ServiceProvider
 
         $router->middlewareGroup('request-catcher', [
             HandleCors::class,
+            EncryptCookies::class,
+            AddQueuedCookiesToResponse::class,
+            StartSession::class,
+            ShareErrorsFromSession::class,
             RequestCatcherMiddleware::class
         ]);
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'request-catcher');
