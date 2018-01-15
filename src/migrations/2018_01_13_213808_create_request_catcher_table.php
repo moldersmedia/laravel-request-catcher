@@ -23,6 +23,7 @@
                 $table->text('url');
                 $table->string('method', 10);
                 $table->integer('tries')->default(0);
+                $table->integer('original_id')->nullable();
                 $table->integer('parent_id')->nullable();
                 $table->timestamp('successful_at')->nullable();
                 $table->timestamps();
