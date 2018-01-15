@@ -22,8 +22,9 @@
                 $table->boolean('is_secure');
                 $table->text('url');
                 $table->string('method', 10);
-                $table->integer('tries')->default(0
-                );
+                $table->integer('tries')->default(0);
+                $table->integer('parent_id')->nullable();
+                $table->integer('_id')->nullable();
                 $table->timestamp('successful_at')->nullable();
                 $table->timestamps();
             });
