@@ -1,6 +1,7 @@
 <?php
 
     return [
+        'enabled' => env('REQUEST_CATCHER_ENABLED', false),
         'vendor'    => [
             'migrations_path' => 'database/migrations/'
         ],

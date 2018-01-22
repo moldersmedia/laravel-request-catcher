@@ -34,6 +34,10 @@ class RequestCatcherMiddleware
      */
     public function handle(Request $request, \Closure $next)
     {
+        if(!config('request-catcher.enabled')){
+            return $next($request);
+        }
+
         if ($request->session()->has('request_catcher_stop')) {
             return $next($request);
         }
